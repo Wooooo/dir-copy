@@ -21,7 +21,7 @@ function move(src, dest) {
     copydir.sync(src, dest, function(stat, filepath, filename) {
         var extname = path.extname(filename);
 
-        if( stat === 'file' && ['.cpp', '.java', '.in', '.out'].indexOf(extname) === -1 ) {
+        if( stat === 'file' && ['.cpp', '.java', '.in', '.out', '.vcxproj'].indexOf(extname) === -1 ) {
             return false;
         }
 
@@ -34,13 +34,18 @@ function move(src, dest) {
 
     var walker = walk.walk(dest);
 
-    walker.on('file', (root, fileStats, next) => {
-        var extname = path.extname(fileStats.name);
-        var filename = path.basename(fileStats.name, extname);
+    walker.on('directory', (root, fileStats, next) => {
+        var dirname = fileStats.name;
 
-        if( extname === '.cpp' ) {
-            fs.rename(path.join(root, fileStats.name), path.join(root, filename.split(' ')[0]+extname));
+        var q = dirname.split(' ')[0];
+
+        q *= 1;
+
+        if( !isNaN(q) ) {
+            console.log(path.join(root, q+''));
+            fs.rename(path.join(root, fileStats.name), path.join(root, q+''));
         }
+
         next();
     })
 }
