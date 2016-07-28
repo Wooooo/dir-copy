@@ -12,8 +12,8 @@ var dest, src;
 
 rl.prompt();
 
-dest = '/Users/gimtaeu/WebstormProjects/file/test/a';
-src = '/Users/gimtaeu/WebstormProjects/file/test/b';
+//dest = '/Users/gimtaeu/WebstormProjects/file/test/a';
+//src = '/Users/gimtaeu/WebstormProjects/file/test/b';
 
 //move(dest,src);
 function move(src, dest) {
